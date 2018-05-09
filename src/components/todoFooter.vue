@@ -36,6 +36,7 @@
         /*
         * v-model对于checkbox类型的input，代表着checked的值
         *   get方法，其返回值就是checked的值
+        *   get方法，一定要return！！！！！
         *
         * this.completeCount>0
         *   是因为如果，列表中已经没有了，就不应该是选中的状态

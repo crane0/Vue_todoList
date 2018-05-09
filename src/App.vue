@@ -12,6 +12,8 @@
   import TodoHeader from './components/todoHeader'
   import TodoList from './components/todoList'
   import TodoFooter from './components/todoFooter'
+  import storageUtils from './utils/storageUtils'
+
 
   export default {
     name: 'App',
@@ -22,7 +24,8 @@
         //   {title: '吸猫', complete: true},
         //   {title: '养狗', complete: false},
         //   ]
-        todos: JSON.parse(localStorage.getItem('todos_key') || '[]')
+        //将数据存在，localStorage中
+        todos: storageUtils.getTodos()
       }
     },
     methods: {
@@ -46,9 +49,15 @@
       todos: {
         deep: true,
         //val就是改变后的todos
-        handler: function (val) {
-          localStorage.setItem('todos_key', JSON.stringify(val))
-        }
+        // handler: function (val) {
+        //   localStorage.setItem('todos_key', JSON.stringify(val))
+        // }
+
+        /*
+        * 因为handler对应的，本来就是一个函数，
+        *   所以可以直接使用storageUtils对象的方法，也是一个函数
+        * */
+        handler: storageUtils.setTodos
       }
     },
     components: {
