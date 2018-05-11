@@ -6,7 +6,11 @@ import App from './App'
 /*
 * 声明使用插件
 * vm和其他组件对象会多一个属性 $http，通过它可以发送ajax请求（get,post）
-*   其实vm和组件对象？
+*   关于vm和组件对象
+*		vm统一管理组件对象
+*		每一个组件，都有自己的组件对象，也就是this
+*		在每个组件对象中data,computed中的变量，都会在vm上有
+*			因为组件对象中创建的，在vm上也会创建一份。
 * */
 Vue.use(VueResource)
 
