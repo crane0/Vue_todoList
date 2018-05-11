@@ -6,7 +6,12 @@
       <TodoHeader ref="header"></TodoHeader>
       <!--<TodoList :todos="todos" :deleteTodo="deleteTodo"></TodoList>-->
       <TodoList :todos="todos"></TodoList>
-      <TodoFooter :todos="todos" :deleteCompleteTodos="deleteCompleteTodos" :checkAllTodos="checkAllTodos"></TodoFooter>
+      <!--<TodoFooter :todos="todos" :deleteCompleteTodos="deleteCompleteTodos" :checkAllTodos="checkAllTodos"></TodoFooter>-->
+      <TodoFooter>
+        <input type="checkbox" v-model="checkAll" slot="checkAll">
+        <span slot="count">已完成{{completeCount}} / 全部{{todos.length}}</span>
+        <button class="btn btn-danger" v-show="completeCount" @click="deleteAllComplete" slot="delete1">清除已完成任务</button>
+      </TodoFooter>
     </div>
   </div>
 </template>
@@ -32,6 +37,34 @@
         todos: storageUtils.getTodos()
       }
     },
+    //从todoFooter中，转移过来
+    computed: {
+      completeCount () {
+        return this.todos.reduce((preTotal, todo) => preTotal + (todo.complete?1:0) ,0)
+      },
+
+      checkAll: {
+        /*
+        * v-model对于checkbox类型的input，代表着checked的值
+        *   get方法，其返回值就是checked的值
+        *   get方法，一定要return！！！！！
+        *
+        * this.completeCount>0
+        *   是因为如果，列表中已经没有了，就不应该是选中的状态
+        * */
+        get () {
+          return this.todos.length === this.completeCount && this.completeCount>0
+        },
+        /*
+        * v-model对于checkbox类型的input，代表着checked的值
+        *   set方法中，传递的参数，就是checked的值
+        * */
+        set (value) {
+          this.checkAllTodos(value)
+        }
+      }
+
+    },
 
     //自定义的事件，是异步的，定义在mounted中
     mounted() {
@@ -56,6 +89,13 @@
       },
       checkAllTodos (isSelected) {
         this.todos.forEach(todo => todo.complete = isSelected)
+      },
+
+      //从todoFooter中转移过来的
+      deleteAllComplete () {
+        if(confirm('确定要删除所有选中的？')){
+          this.deleteCompleteTodos()
+        }
       }
     },
 

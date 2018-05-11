@@ -32,14 +32,17 @@ new Vue({
 
 #### 关于项目
 1. 添加数据，是按回车来确认，没有按钮点击。
-2. 添加到列表中的数据，存放在了localStorage中
+2. 添加到列表中的数据，存放在了`localStorage`中
 
 #### 组件间通信
 > 如果要对应的文件夹，要将其改名为src
 >> 如果更名后还是报错，要在`build/webpack.base.conf.js`第25行，更正为`./src/main.jss`
 
-1. src_todos1文件夹，使用的是基础的props进行通信
+1. `src_todos1`文件夹，使用的是基础的`props`进行通信
 
-2. src_自定义事件&PubSub，使用了$emit $on
-    另外还有一种是，$refs.xxx.$on的形式,
-    还有使用PubSub进行通信
+2. `src_自定义事件&PubSub`文件夹，使用了`$emit $on`
+    另外还有一种是，`$refs.xxx.$on`的形式,
+    还有使用`PubSub`进行通信
+
+3. `src`文件夹，使用的是`slot`通信
+    注意，与之前的相比，将原本在`todoFooter.vue`中的方法调用，全部转移到了`App.vue`中
