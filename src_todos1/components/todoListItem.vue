@@ -9,40 +9,40 @@
 </template>
 
 <script>
-  import PubSub from 'pubsub-js'
-  export default {
+    export default {
 
-    props: {
-      todo: Object,
-      // deleteTodo: Function,
-      index: Number
-    },
+      props: {
+        todo: Object,
+        deleteTodo: Function,
+        index: Number
+      },
 
-    data () {
-      return {
-        bgColor: 'white',
-        isShow: false
-      }
-    },
-
-    methods: {
-      handleEnter (isEnter) {
-        if (isEnter) {
-          this.isShow = true
-          this.bgColor = '#ccc'
-        } else {
-          this.isShow = false
-          this.bgColor = '#fff'
+      data () {
+        return {
+          bgColor: 'white',
+          isShow: false
         }
       },
-      deleteItem () {
-        if(confirm('确认删除？')){
-          // this.deleteTodo(this.index)
-          PubSub.publish('deleteTodo', this.index)
+
+      methods: {
+        handleEnter (isEnter) {
+          if (isEnter) {
+            this.isShow = true
+            this.bgColor = '#ccc'
+          } else {
+            this.isShow = false
+            this.bgColor = '#fff'
+          }
+        },
+        deleteItem () {
+          if(confirm('确认删除？')){
+            this.deleteTodo(this.index)
+          }
+
         }
+
       }
     }
-  }
 </script>
 
 

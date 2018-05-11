@@ -7,9 +7,9 @@
 <script>
     export default {
 
-        // props: {
-        //   addTodo: Function
-        // },
+        props: {
+          addTodo: Function
+        },
 
         data () {
           return {
@@ -31,12 +31,7 @@
               complete: false
             }
             //调用添加函数
-            // this.addTodo(todo)
-
-            /*触发自定义事件*/
-            this.$emit('addTodo', todo)
-
-            this.inputTodo = ''
+            this.addTodo(todo)
           }
         }
     }

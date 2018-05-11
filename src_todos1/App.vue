@@ -1,18 +1,14 @@
 <template>
   <div class="todo-container">
     <div class="todo-wrap">
-      <!--<TodoHeader :addTodo="addTodo"></TodoHeader>-->
-      <!--<TodoHeader @addTodo="addTodo"></TodoHeader>-->
-      <TodoHeader ref="header"></TodoHeader>
-      <!--<TodoList :todos="todos" :deleteTodo="deleteTodo"></TodoList>-->
-      <TodoList :todos="todos"></TodoList>
+      <TodoHeader :addTodo="addTodo"></TodoHeader>
+      <TodoList :todos="todos" :deleteTodo="deleteTodo"></TodoList>
       <TodoFooter :todos="todos" :deleteCompleteTodos="deleteCompleteTodos" :checkAllTodos="checkAllTodos"></TodoFooter>
     </div>
   </div>
 </template>
 
 <script>
-  import PubSub from 'pubsub-js'
   import TodoHeader from './components/todoHeader'
   import TodoList from './components/todoList'
   import TodoFooter from './components/todoFooter'
@@ -31,17 +27,6 @@
         //将数据存在，localStorage中
         todos: storageUtils.getTodos()
       }
-    },
-
-    //自定义的事件，是异步的，定义在mounted中
-    mounted() {
-      // this.$on('addTodo', this.addTodo)
-      this.$refs.header.$on('addTodo', this.addTodo)
-
-      //订阅消息（这个例子，用于隔代传递数据）
-      PubSub.subscribe('deleteTodo', (msg, index) => {
-        this.deleteTodo(index)
-      })
     },
     methods: {
       addTodo (todo) {

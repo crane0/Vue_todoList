@@ -1,7 +1,7 @@
 <template>
     <ul class="todo-main">
       <TodoListItem v-for="(todo, index) in todos" :key="index"
-        :todo="todo" :index="index"/>
+        :todo="todo" :deleteTodo="deleteTodo" :index="index"/>
     </ul>
 </template>
 
@@ -10,7 +10,7 @@
     import TodoListItem from './todoListItem'
     export default {
       //props的类型，自己指定
-      props: ['todos'],
+      props: ['todos', 'deleteTodo'],
 
       components: {
         TodoListItem
