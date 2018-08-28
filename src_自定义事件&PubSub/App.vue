@@ -38,7 +38,7 @@
       // this.$on('addTodo', this.addTodo)
       this.$refs.header.$on('addTodo', this.addTodo)
 
-      //订阅消息（这个例子，用于隔代传递数据）
+      //订阅消息（这个例子，用于隔代传递数据），msg就代表订阅的消息名，即deleteTodo，index代表PubSub.publish()中传递的第二个参数
       PubSub.subscribe('deleteTodo', (msg, index) => {
         this.deleteTodo(index)
       })
